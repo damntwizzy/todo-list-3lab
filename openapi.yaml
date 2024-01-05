@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: TODO List API
+  version: 1.0.0
+
+servers:
+  - url: localhost
+
+paths:
+  /items:
+    get:
+      summary: Получить все элементы из базы данных
+      responses:
+        '200':
+          description: Успешный запрос
+          content:
+            application/json:
+              example:
+                - id: 1
+                  value: "Item 1"
+                - id: 2
+                  value: "Item 2"
+                - id: 3
+                  value: "Item 3"
+    post:
+      summary: Добавить новый элемент в базу данных
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+      responses:
+        '200':
+          description: Элемент успешно добавлен в базу данных
+          content:
+            application/json:
+              example:
+                - id: 1
+                  value: "Item 1"
+                - id: 2
+                  value: "Item 2"
+                - id: 3
+                  value: "Item 3"
+                - id: 4
+                  value: "Item 4"
+        '400':
+          description: Не удалось добавить элемент в базу данных
+  /items/{id}:  # Исправленный путь
+    put:
+      summary: Обновить элемент в базе данных
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Идентификатор элемента
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+      responses:
+        '200':
+          description: Элемент успешно обновлен
+          content:
+            application/json:
+              example:
+                - id: 1
+                  value: "Item 1"
+                - id: 2
+                  value: "Item 2"
+                - id: 3
+                  value: "Item 3"
+                - id: 4
+                  value: "Item 4"
+        '400':
+          description: Не удалось обновить элемент
+    delete:
+      summary: Удалить элемент из базы данных
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Идентификатор элемента
+      responses:
+        '200':
+          description: Элемент успешно удален
+          content:
+            application/json:
+              example:
+                - id: 1
+                  value: "Item 1"
+                - id: 2
+                  value: "Item 2"
+                - id: 3
+                  value: "Item 3"
+                - id: 4
+                  value: "Item 4"
+        '400':
+          description: Не удалось удалить элемент
